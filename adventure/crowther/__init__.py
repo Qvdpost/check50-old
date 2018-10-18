@@ -20,6 +20,7 @@ room_2_description = "You are at the end of a road at the top of a small hill. Y
 
 room_3_name = "Inside building\n"
 room_3_description = "You are inside a building, a well house for a large spring. The exit door is to the south.  There is another room to the north, but the door is barred by a shimmering curtain.\n"
+room_3_items = "KEYS: a set of keys\nWATER: a bottle of water"
 
 room_8_name = "Beneath grate\n"
 room_8_description = "You are in a small chamber beneath a 3x3 steel grate to the surface.  A low crawl over cobbles leads inward to the west.\n"

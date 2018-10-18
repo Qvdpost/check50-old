@@ -105,7 +105,7 @@ def find_items():
     """Finds items in rooms."""
     check50.exists("item.py")
     try:
-        check50.run(run_command).stdin("in").stdout(room_3_description + "KEYS: a set of keys\nWATER: a bottle of water")
+        check50.run(run_command).stdin("in").stdout(room_3_description + room_3_items)
     except check50.Failure as error:
         raise check50.Failure(f"Could not find items upon first entering room.\n    {error}")
     try:

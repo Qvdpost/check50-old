@@ -19,7 +19,7 @@ room_2_name = "End of road\n"
 room_2_description = "You are at the end of a road at the top of a small hill. You can see a small building in the valley to the east.\n"
 
 room_3_name = "Inside building\n"
-room_3_description = "You are inside a building, a well house for a large spring. The exit door is to the south.  There is another room to the north, but the door is barred by a shimmering curtain.\n"
+room_3_description = "You are inside a building, a well house for a large spring.\n"
 room_3_items = "KEYS: a set of keys"
 
 room_8_name = "Beneath grate\n"

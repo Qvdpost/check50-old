@@ -4,4 +4,8 @@ a set of keys
 
 LAMP
 a brightly shining brass lamp
-2
+8
+
+ROD
+a black rod with a rusty star
+12

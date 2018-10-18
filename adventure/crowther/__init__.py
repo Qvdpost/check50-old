@@ -12,8 +12,8 @@ def test_name():
 
 run_command = "python3 adventure.py"
 
-room_1_description = "You are standing at the end of a road before a small brick building.  A small stream flows out of the building and down a gully to the south.  A road runs up a small hill to the west.\n"
 room_1_name = "Outside building\n"
+room_1_description = "You are standing at the end of a road before a small brick building.  A small stream flows out of the building and down a gully to the south.  A road runs up a small hill to the west.\n"
 
 room_2_name = "End of road\n"
 room_2_description = "You are at the end of a road at the top of a small hill. You can see a small building in the valley to the east.\n"
@@ -21,8 +21,13 @@ room_2_description = "You are at the end of a road at the top of a small hill. Y
 room_3_name = "Inside building\n"
 room_3_description = "You are inside a building, a well house for a large spring. The exit door is to the south.  There is another room to the north, but the door is barred by a shimmering curtain.\n"
 
+room_8_name = "Beneath grate\n"
+room_8_description = "You are in a small chamber beneath a 3x3 steel grate to the surface.  A low crawl over cobbles leads inward to the west.\n"
+room_8_items = "LAMP: a brightly shining brass lamp"
+
 room_14_description = "You are in a splendid chamber thirty feet high.  The walls are frozen rivers of orange stone.  A narrow canyon and a good passage exit from east and west sides of the chamber.\n"
 room_15_description = "You are in a splendid chamber thirty feet high.  The walls are frozen rivers of orange stone.  A narrow canyon and a good passage exit from east and west sides of the chamber. High in the cavern, you see a little bird flying around the rocks.  It takes one look at the black rod and quickly flies out of sight.\n"
+
 @check50.check()
 def exists():
     """Checking if all files exist."""
@@ -125,11 +130,19 @@ def handle_invalid_items():
     check50.run(run_command).stdin("in").stdin("DROP something").stdout("No such item.")
 
 @check50.check(handle_items)
+def inventory():
+    """Using the INVENTORY command."""
+    try:
+        check50.run(run_command).stdin("INVENTORY").stdout("Your inventory is empty.")
+    except check50.Failure as error:
+        raise check50.Failure(f"Let the player know they have no items.\n    {error}")
+
+@check50.check(handle_items)
 def conditional_move():
-    """Check if holding an item affects connected room."""
+    """Check if holding an item affects conditional movement."""
     check50.run(run_command).stdin("in").stdin("out").stdin("down\ndown\ndown\ndown").stdout("The grate is locked and you don't have any keys.")
 
-    check50.run(run_command).stdin("in").stdin("TAKE keys").stdin("out").stdin("down\ndown\ndown\ndown").stdout("You are in a small chamber beneath a 3x3 steel grate to the surface.  A low crawl over cobbles leads inward to the west.\nLAMP: a brightly shining brass lamp")
+    check50.run(run_command).stdin("in").stdin("TAKE keys").stdin("out").stdin("down\ndown\ndown\ndown").stdout(room_8_description + room_8_items)
     # Check for move with multiple conditions.
     try:
         check50.run(run_command).stdin("IN\nTAKE KEYS\nOUT\nDOWN\nDOWN\nDOWN\nDOWN\nTAKE LAMP\nIN\nWEST\nWEST\nWEST\nTAKE BIRD\nWEST\nDOWN\nSOUTH\nTAKE NUGGET\nOUT\nDROP NUGGET\nUP\nEAST\nEAST\nEAST\nTAKE ROD\nWEST\nWEST\nLOOK\n").stdout(room_14_description).stdin("EAST\nDROP BIRD\nWEST\nLOOK\n").stdout(room_15_description)

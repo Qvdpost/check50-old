@@ -109,7 +109,7 @@ def find_items():
     except check50.Failure as error:
         raise check50.Failure(f"Could not find items upon first entering room.\n    {error}")
     try:
-        check50.run(run_command).stdin("in").stdin("out").stdin("in").stdin("look").stdout("KEYS: a set of keys\nWATER: a bottle of water")
+        check50.run(run_command).stdin("in").stdin("out").stdin("in").stdin("look").stdout(room_3_items)
     except check50.Failure as error:
         raise check50.Failure(f"Could not find items when using LOOK.\n    {error}")
 

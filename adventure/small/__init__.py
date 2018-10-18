@@ -144,10 +144,5 @@ def inventory():
 
 @check50.check(conditional_move)
 def forced_move():
-    """Checking if forced movements bar the grate."""
+    """Checking if forced movements prevent the player from passing the grate."""
     check50.run(run_command).stdin("down\ndown\ndown\ndown").stdout("The grate is locked and you don't have any keys.\nOutside grate")
-
-@check50.check(forced_move)
-def won():
-    """Testing Crowther Adventure win condition."""
-    check50.run(run_command).stdin("IN\nTAKE KEYS\nOUT\nDOWN\nDOWN\nDOWN\nDOWN\nTAKE LAMP\nWEST\nWEST\nWEST\n").stdout("You've found the hidden path to victory. Unfortunately, the passage is blocked by a barrier marked "+'"Under Construction."')

@@ -103,6 +103,7 @@ def commands():
 @check50.check(helper_commands)
 def find_items():
     """Finds items in rooms."""
+    check50.exists("item.py")
     try:
         check50.run(run_command).stdin("in").stdout(room_3_description + "KEYS: a set of keys\nWATER: a bottle of water")
     except check50.Failure as error:
@@ -115,6 +116,7 @@ def find_items():
 @check50.check(find_items)
 def handle_items():
     """Take and drop items."""
+    check50.exists("inventory.py")
     check50.run(run_command).stdin("in").stdin("TAKE keys").stdout("KEYS taken.")
     check50.run(run_command).stdin("in").stdin("TAKE keys").stdin("out").stdin("DROP keys").stdout("KEYS dropped.").stdin("look").stdout("KEYS: a set of keys\n")
 

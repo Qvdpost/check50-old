@@ -33,9 +33,6 @@ room_15_description = "You are in a splendid chamber thirty feet high.  The wall
 def exists():
     """Checking if all files exist."""
     check50.include("data")
-    # check50.include("data/CrowtherRooms.txt")
-    # check50.include("data/CrowtherItems.txt")
-
     check50.exists("adventure.py")
     check50.exists("room.py")
     check50.exists("inventory.py")
@@ -152,7 +149,7 @@ def conditional_move():
 
 @check50.check(conditional_move)
 def forced_move():
-    """Checking if forced movements bar the grate."""
+    """Checking if forced movements prevent the player from passing the grate."""
     check50.run(run_command).stdin("down\ndown\ndown\ndown").stdout("The grate is locked and you don't have any keys.\nOutside grate")
 
 @check50.check(conditional_move)

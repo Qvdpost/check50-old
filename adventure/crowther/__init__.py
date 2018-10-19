@@ -312,4 +312,6 @@ def won():
         check.stdout("> ")
         check.stdin(move, prompt=False)
 
-    check.stdout("You have collected all the treasures and are admitted to the Adventurer's Hall of Fame.  Congratulations!").exit(0)
+    check.stdout("You have collected")
+    check.stdout("Adventurer")
+    check.stdout("Congratulations").exit(0)
